@@ -45,6 +45,7 @@ Webflow.push(function() {
 	    });
 
 	    // Send data to Segment
+        analytics.identify(email);
         analytics.identify({
             email: email,
             last_form_submission_confirmation_url: obj["last_form_submission_confirmation_url"],
