@@ -45,8 +45,8 @@ Webflow.push(function() {
 	    });
 
 	    // Send data to Segment
-        analytics.identify(email);
-        analytics.identify({
+      analytics.identify(email);
+      analytics.identify({
             email: email,
             last_form_submission_confirmation_url: obj["last_form_submission_confirmation_url"],
             last_form_submission_name: $form.get(0).attributes[2].nodeValue,
@@ -59,8 +59,11 @@ Webflow.push(function() {
             url: document.URL,
             utm: utmCookies
 	    });
+
+      // Add email to local storage
+      localStorage.setItem('email_given', email);
 		
-		setTimeout(function() {
+		  setTimeout(function() {
 		    resolve('Success!');
 		  }, 1000);
 	});
