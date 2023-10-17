@@ -75,6 +75,12 @@ Webflow.push(function() {
 	    	.hide() // optional hiding of form
 	  		.siblings('.w-form-done').show() // Show success
 	    	.siblings('.w-form-fail').hide(); // Hide failure
+      
+      // If submitting a form to allow for /tools usage
+      if ($('.tool-popover_component').hasClass('tool-popover_component')) {
+        $('.tool-popover_component').hide();
+      }
+        
       }).catch(function(error) {
         console.log(error);
         $('.error-message-text').text(error);
