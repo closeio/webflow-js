@@ -3,7 +3,6 @@ const email_given_exists = localStorage.getItem('email_given') !== null;
 let email_given;
 if (email_given_exists) {
     email_given = localStorage.getItem('email_given');
-    console.log(email_given);
 }
 
 // Check to see if user has used a tool
