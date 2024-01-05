@@ -4,6 +4,7 @@ let modalShown;
 let startTime;
 let returningVisitor;
 //let modalException = true; // Exception status for working on first-time visitors
+//let noModal = true; // Prevent modal from ever showing
 
 // Function to check and display the visitor status
 function checkVisitorStatus() {
@@ -38,18 +39,21 @@ if (localStorage.getItem('trialModalShown') === 'true') {
 
 // Show Modal
 function showModal() {
-    // Only show on desktop & tablet
-    if (window.innerWidth >= 768) {
-        modal.style.display = 'flex';
-        modalShown = true;
-        localStorage.setItem('trialModalShown', 'true');
-        
-        // Send data to Segment
-        analytics.identify(analytics.user().anonymousId());
-        analytics.track('Popup Viewed', {
-            popup_name: 'Start Free Trial',
-            url: document.URL
-        });
+    // Okay to show modal
+    if (!noModal) {
+        // Only show on desktop & tablet
+        if (window.innerWidth >= 768) {
+            modal.style.display = 'flex';
+            modalShown = true;
+            localStorage.setItem('trialModalShown', 'true');
+            
+            // Send data to Segment
+            analytics.identify(analytics.user().anonymousId());
+            analytics.track('Popup Viewed', {
+                popup_name: 'Start Free Trial',
+                url: document.URL
+            });
+        }
     }
 }
 
