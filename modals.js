@@ -1,5 +1,7 @@
-const modal = document.getElementById('modal_component');
-const modalClose = document.getElementById('modal_close-button');
+setTimeout(function() {
+    const modal = document.getElementById('modal_component');
+    const modalClose = document.getElementById('modal_close-button');
+}, 2000);
 let modalShown;
 let startTime;
 let returningVisitor;
