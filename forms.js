@@ -39,7 +39,7 @@ Webflow.push(function () {
 
       cookies.forEach(cookie => {
         let [name, value] = cookie.split('=').map(s => s.trim());
-        if (name.includes('utm')) {
+        if (name.includes('utm') || name.includes('gclid')) {
           utmData[name.replace('_last', '')] = decodeURIComponent(value);
         }
       });
