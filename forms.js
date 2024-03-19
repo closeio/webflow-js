@@ -56,7 +56,11 @@ Webflow.push(function () {
         email: email,
         fields: obj,
         url: document.URL,
-        utm: utmData
+        context: {
+          campaign: {
+            ...utmData,
+          }
+        }
       });
 
       // Add email to local storage
