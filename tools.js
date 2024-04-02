@@ -17,6 +17,6 @@ if (tool_uses_exists) {
 }
 
 // If user hasn't given email and has used tools twice
-if (!email_given_exists && tool_uses > 2) {
+if (!email_given_exists && tool_uses > 0) { // Updated from 2 -> 0 on 4/2/24 to test for conversion increase
     $('.tool-popover_component').show();
 }
