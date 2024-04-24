@@ -35,12 +35,12 @@ Webflow.push(function () {
 
       // Get UTM cookie data
       let cookies = document.cookie.split(';');
-      let utmCookies = {};
+      let utmData = {};
 
       cookies.forEach(cookie => {
         let [name, value] = cookie.split('=').map(s => s.trim());
-        if (name.includes('utm')) {
-          utmCookies[name] = decodeURIComponent(value);
+        if (name.includes('utm') || name.includes('gclid')) {
+          utmData[name.replace('_last', '')] = decodeURIComponent(value);
         }
       });
 
@@ -56,7 +56,11 @@ Webflow.push(function () {
         email: email,
         fields: obj,
         url: document.URL,
-        utm: utmCookies
+        context: {
+          campaign: {
+            ...utmData,
+          }
+        }
       });
 
       // Add email to local storage
