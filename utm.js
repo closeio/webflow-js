@@ -60,6 +60,7 @@ var utm_names = [
   'utm_content',
   'utm_term',
   'gclid',
+  'campaign_id'
 ];
 
 function getLastTouchCookie(name) {
