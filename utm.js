@@ -61,6 +61,9 @@ var utm_names = [
   'utm_term',
   'gclid',
   'cid',
+  'msclkid',
+  'fbclid',
+  'li_fat_id',
 ];
 
 function getLastTouchCookie(name) {
