@@ -6,9 +6,11 @@ businessDescription.addEventListener('change', function() {
   if (businessDescription.value === 'other') {
     otherField.classList.remove('hidden');
     otherField.children[0].focus(); 
+    otherField.children[0].setAttribute("required", true);
   } else {
     otherField.classList.add('hidden');
     otherField.children[0].value = '';
+    otherField.children[0].removeAttribute("required");
   }
 });
 
