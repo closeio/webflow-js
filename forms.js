@@ -45,24 +45,46 @@ Webflow.push(function () {
         }
       });
 
-      // Send data to Segment
-      analytics.identify(analytics.user().anonymousId(), {
-        email: email,
-        last_form_submission_confirmation_url: obj["last_form_submission_confirmation_url"],
-        last_form_submission_name: $form.get(0).attributes[2].nodeValue,
-        last_submission_url: document.URL
-      });
-      analytics.track("Form Submission", {
-        form_name: $form.get(0).attributes[2].nodeValue,
-        email: email,
-        fields: obj,
-        url: document.URL,
-        context: {
-          campaign: {
-            ...utmData,
-          }
+      // Submit data to Zapier
+      fetch('https://hooks.zapier.com/hooks/catch/14496686/2dzksxl/', {
+        method: 'POST',
+        body: JSON.stringify({
+                form_name: $form.get(0).attributes[2].nodeValue,
+                email: email,
+                fields: obj,
+                url: document.URL
+            })
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error pushing data: ${response.statusText}`);
         }
-      });
+        console.log("Data pushed successfully!");
+        })
+        .catch(error => console.error("Error:", error));      
+
+        // Send data to Segment
+        try {
+            analytics.identify(analytics.user().anonymousId(), {
+                email: email,
+                last_form_submission_confirmation_url: obj["last_form_submission_confirmation_url"],
+                last_form_submission_name: $form.get(0).attributes[2].nodeValue,
+                last_submission_url: document.URL
+            });
+            analytics.track("Form Submission", {
+                form_name: $form.get(0).attributes[2].nodeValue,
+                email: email,
+                fields: obj,
+                url: document.URL,
+                context: {
+                    campaign: {
+                    ...utmData,
+                    }
+                }
+            });
+        } catch (error) {
+            console.log("Ad blocker active");
+        }
 
       // Add email to local storage
       localStorage.setItem('email_given', email);
