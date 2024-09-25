@@ -46,13 +46,18 @@ Webflow.push(function () {
       });
 
       // Submit data to Zapier
-      fetch('https://hooks.zapier.com/hooks/catch/14496686/2dzksxl/', {
+      fetch('https://hooks.zapier.com/hooks/catch/14496686/2daprvy/', {
         method: 'POST',
         body: JSON.stringify({
                 form_name: $form.get(0).attributes[2].nodeValue,
                 email: email,
                 fields: obj,
-                url: document.URL
+                url: document.URL,
+                context: {
+                    campaign: {
+                    ...utmData,
+                    }
+                }
             })
         })
         .then(response => {
