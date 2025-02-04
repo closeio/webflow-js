@@ -88,7 +88,7 @@ Webflow.push(function () {
 
                 // Send data to Segment
                 try {
-                    analytics.identify(analytics.user().anonymousId(), {
+                    analytics.identify({
                         email: email,
                         last_form_submission_confirmation_url: obj["last_form_submission_confirmation_url"],
                         last_form_submission_name: $form.get(0).attributes[2].nodeValue,
