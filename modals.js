@@ -48,7 +48,6 @@ function showModal() {
             localStorage.setItem('trialModalShown', 'true');
             
             // Send data to Segment
-            analytics.identify(analytics.user().anonymousId());
             analytics.track('Popup Viewed', {
                 popup_name: 'Start Free Trial',
                 url: document.URL
