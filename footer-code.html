@@ -140,18 +140,15 @@ $(function() {
 });
 </script>
 
-<!-- Script to clean up bad segment user IDs as per https://github.com/closeio/webflow-js/issues/10  -->
+<!-- 
+  Script to clean up bad segment user IDs as per https://github.com/closeio/webflow-js/issues/10
+  TODO: This can all be removed once the BI team is satisfied that we have clean attribution data.
+-->
 <script>
   (function(window) {
     window.analytics.ready(() => {
-      // For initial testing, unless query param is present (any truthy string), bail out.
-      const resetIds = !!(new URLSearchParams(window.location.search).get('resetAnalyticsIds'));
-      if (!resetIds) {
-        return;
-      }
-
-      // Working inside of a try/catch block as some analytics features could be blocked or missing 
-      // due to ad/tracking blockers. 
+      // Working inside of a try-catch block as some analytics features could be blocked
+      // or missing due to ad/tracking blockers.
       try {
         const anonId = window.analytics.user().anonymousId();
         const userId = window.analytics.user().id();
