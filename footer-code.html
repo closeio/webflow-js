@@ -142,8 +142,8 @@ $(function() {
 
 <!-- Script to clean up bad segment user IDs as per https://github.com/closeio/webflow-js/issues/10  -->
 <script>
-  (function(window, analytics) {
-    analytics.ready(() => {
+  (function(window) {
+    window.analytics.ready(() => {
       // For initial testing, unless query param is present (any truthy string), bail out.
       const resetIds = !!(new URLSearchParams(window.location.search).get('resetAnalyticsIds'));
       if (!resetIds) {
@@ -153,8 +153,8 @@ $(function() {
       // Working inside of a try/catch block as some analytics features could be blocked or missing 
       // due to ad/tracking blockers. 
       try {
-        const anonId = analytics.user().anonymousId();
-        const userId = analytics.user().id();
+        const anonId = window.analytics.user().anonymousId();
+        const userId = window.analytics.user().id();
 
         // Bail out if userId is not set or already a "good" id.
         if (!userId || userId.startsWith('user_')) {
@@ -163,11 +163,11 @@ $(function() {
 
         // If a bad user id is detected, clear it out by resetting.
         // Then restore the original anonymous id.
-        analytics.reset()
-        analytics.setAnonymousId(anonId);        
+        window.analytics.reset()
+        window.analytics.setAnonymousId(anonId);        
       } catch (err) {
         console.error(err);
       }
     });
-  })(window, window.analytics);
+  })(window);
 </script>
